@@ -18,25 +18,25 @@ public class ProducerController {
 
     private final ProducerRepository producerRepository;
 
-    @RolesAllowed({"ADMIN","USER"})
+    //@RolesAllowed({"ADMIN","USER"})
     @GetMapping(value = "all")
     public List<Producer> findAll() {
         return producerRepository.findAll();
     }
 
-    @RolesAllowed({"ADMIN","USER"})
+    //@RolesAllowed({"ADMIN","USER"})
     @GetMapping({"/{id}","/"})
     public Optional<Producer> findById(@PathVariable(required = false, name = "id") Optional<Long> id) {
         return id.map(producerRepository::findById).orElse(null);
     }
 
-    @RolesAllowed({"ADMIN"})
+    //@RolesAllowed({"ADMIN"})
     @PostMapping
     public Producer save(@RequestBody Producer producer){
         return producerRepository.save(producer);
     }
 
-    @RolesAllowed({"ADMIN"})
+    //@RolesAllowed({"ADMIN"})
     @PutMapping("name")
     public Producer changeName(@ApiParam(required = true) @RequestParam(name = "id") Long id, @RequestParam(name = "name") String name){
         return producerRepository.findById(id)
@@ -46,13 +46,13 @@ public class ProducerController {
                 .orElse(null);
     }
 
-    @RolesAllowed({"ADMIN"})
+    //@RolesAllowed({"ADMIN"})
     @DeleteMapping("{id}")
     public void delete(@PathVariable(name = "id") Long id) {
         producerRepository.deleteById(id);
     }
 
-    @RolesAllowed({"ADMIN","USER"})
+    //@RolesAllowed({"ADMIN","USER"})
     @GetMapping("/name/{name}")
     public Optional<Producer> findByName(@PathVariable(name="name") String name) {
         return producerRepository.findByName(name);

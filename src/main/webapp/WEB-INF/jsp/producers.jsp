@@ -4,11 +4,11 @@
     <head>
         <title>Producers</title>
         <style>
-            <%@include file="/style.css" %>
+            <%@include file="style.css" %>
         </style>
     </head>
     <body>
-    <c:import url="/navibar.jsp"/>
+    <c:import url="navibar.jsp"/>
         <h2>Producers</h2>
         <p>
         <table border=1 cellpadding=8>
@@ -22,10 +22,10 @@
         <c:forEach var="producer" items="${producers}">
              <tr>
              <td><c:out value="${producer.id}"/></td>
-             <td><a href="${PageContext.request.contextPath}/find?id=${producer.id}"><c:out value="${producer.name}"/></a></td>
+             <td><a href="${PageContext.request.contextPath}/producer/find?id=${producer.id}"><c:out value="${producer.name}"/></a></td>
 
-             <td><button onclick="location.href='/updateProducer?id=${producer.id}'"  class="button"/>UPDATE</button></td>
-             <td><button onclick="location.href='/delete?id=${producer.id}'"  class="button"/>DELETE</button></td>
+             <td><button onclick="location.href='/producer/update?id=${producer.id}'"  class="button"/>UPDATE</button></td>
+             <td><button onclick="location.href='/producer/delete?id=${producer.id}'"  class="button"/>DELETE</button></td>
              </tr>
         </c:forEach>
         </table>

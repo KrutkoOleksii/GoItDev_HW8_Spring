@@ -4,11 +4,11 @@
     <head>
         <title>Users</title>
         <style>
-            <%@include file="/style.css" %>
+            <%@include file="style.css" %>
         </style>
     </head>
     <body>
-    <c:import url="/navibar.jsp"/>
+    <c:import url="navibar.jsp"/>
         <h2>Users</h2>
         <p>
         <table border=1 cellpadding=8>
@@ -26,12 +26,12 @@
              <tr>
              <td><c:out value="${user.id}"/></td>
              <td><c:out value="${user.email}"/></td>
-             <td><c:out value="${user.password}"/></td>
-             <td><a href="${PageContext.request.contextPath}/find?id=${user.id}"><c:out value="${user.firstName}"/></a></td>
+             <td><c:out value="*****"/></td>
+             <td><a href="${PageContext.request.contextPath}/user/find?id=${user.id}"><c:out value="${user.firstName}"/></a></td>
              <td><c:out value="${user.lastName}"/></td>
 
-             <td><button onclick="location.href='/updateUser?id=${user.id}'"  class="button"/>UPDATE</button></td>
-             <td><button onclick="location.href='/delete?id=${user.id}'"  class="button"/>DELETE</button></td>
+             <td><button onclick="location.href='/user/update?id=${user.id}'"  class="button"/>UPDATE</button></td>
+             <td><button onclick="location.href='/user/delete?id=${user.id}'"  class="button"/>DELETE</button></td>
              </tr>
         </c:forEach>
         </table>

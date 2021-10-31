@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Project management</title>
+    <title>Product management</title>
     <style>
           <%@include file="style.css" %>
     </style>

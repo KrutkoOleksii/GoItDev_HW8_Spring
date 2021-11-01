@@ -50,9 +50,13 @@ public class ProductController {
                 .producer(producerRepository.findByName(model.getAttribute("producer").toString()).get())
                 .build();
         Product save = productRepository.save(product);
-        List<Product> productList = productRepository.findAll();
-        model.addAttribute("products",productList);
-        return "products";
+        return viewProducts(model);
+    }
+
+    @RequestMapping(value = {"delete"}, method = RequestMethod.GET)
+    public String delete(Model model, Long id){
+        productRepository.deleteById(id);
+        return viewProducts(model);
     }
 
 //    @GetMapping(value = "all")

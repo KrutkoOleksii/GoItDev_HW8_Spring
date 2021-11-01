@@ -12,7 +12,7 @@
         <h2>Producer parameters:</h2>
         <p>
         <c:if test="${mode == 0}">
-            <form name="producerSaveForm" method="post" action="producers" >
+            <form name="producerSaveForm" method="get" action="saveProducer" >
                 Name: <input type="text" name="name"/> <br/>
 
                 <input type="submit" value="Add producer" class="button"/>

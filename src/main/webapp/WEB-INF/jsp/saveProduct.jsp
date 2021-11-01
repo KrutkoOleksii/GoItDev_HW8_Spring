@@ -12,7 +12,7 @@
         <h2>Product parameters:</h2>
         <p>
         <c:if test="${mode == 0}">
-            <form name="productSaveForm" method="post" action="products" >
+            <form name="productSaveForm" method="get" action="add" >
                 Name: <input type="text" name="name"/> <br/>
                 Producer: <select name="producerList"> "S{producers}"
                     <c:forEach items="${producers}" var="producer">

@@ -18,6 +18,7 @@
              <th>Password</th>
              <th>First name</th>
              <th>Last name</th>
+             <th>Role</th>
 
              <th>"UPDATE"</th>
              <th>"DELETE"</th>
@@ -29,6 +30,7 @@
              <td><c:out value="*****"/></td>
              <td><a href="${PageContext.request.contextPath}/user/find?id=${user.id}"><c:out value="${user.firstName}"/></a></td>
              <td><c:out value="${user.lastName}"/></td>
+             <td><c:out value="${user.role}"/></td>
 
              <td><button onclick="location.href='/user/update?id=${user.id}'"  class="button"/>UPDATE</button></td>
              <td><button onclick="location.href='/user/delete?id=${user.id}'"  class="button"/>DELETE</button></td>

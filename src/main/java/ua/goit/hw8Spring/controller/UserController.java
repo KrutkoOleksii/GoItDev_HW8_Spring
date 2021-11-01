@@ -26,6 +26,12 @@ public class UserController {
         return "users";
     }
 
+    @RequestMapping(value = {"add"}, method = RequestMethod.GET)
+    public String add(Model model){
+        model.addAttribute("mode",0);
+        return "saveUser";
+    }
+
 //    @GetMapping(value = "all")
 //    public List<User> findAll() {
 //        return userRepository.findAll();

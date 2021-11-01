@@ -34,6 +34,27 @@ public class ProductController {
         model.addAttribute("producers",producers);
         return "saveProduct";
     }
+
+    @RequestMapping(value = {"update"}, method = RequestMethod.GET)
+    public String update(Model model, Long id){
+        model.addAttribute("mode",1);
+        model.addAttribute("product", productRepository.findById(id).get());
+        return "saveProduct";
+    }
+
+    @RequestMapping(value = {"saveProduct"}, method = RequestMethod.POST)
+    public String save(Model model){
+        Product product = Product.builder()
+                .name(model.getAttribute("name").toString())
+                .price(Long.getLong(model.getAttribute("price").toString()))
+                .producer(producerRepository.findByName(model.getAttribute("producer").toString()).get())
+                .build();
+        Product save = productRepository.save(product);
+        List<Product> productList = productRepository.findAll();
+        model.addAttribute("products",productList);
+        return "products";
+    }
+
 //    @GetMapping(value = "all")
 //    public List<Product> findAll() {
 //        return productRepository.findAll();

@@ -40,19 +40,19 @@ public class UserController {
     @RequestMapping(value = {"update"}, method = RequestMethod.GET)
     public String update(Model model, Long id){
         model.addAttribute("mode",1);
-        model.addAttribute("producer", userRepository.findById(id).get());
-        return "saveProducer";
+        model.addAttribute("user", userRepository.findById(id).get());
+        return "saveUser";
     }
 
-    @RequestMapping(value = {"saveProducer"}, method = RequestMethod.GET)
-    public String save(Model model){
-        User user = User.builder()
-                .email(model.getAttribute("email").toString())
-                .password(model.getAttribute("password").toString())
-                .firstName(model.getAttribute("firstName").toString())
-                .lastName(model.getAttribute("lastName").toString())
-                .role(Role.valueOf(model.getAttribute("role").toString()))
-                .build();
+    @RequestMapping(value = {"saveUser"}, method = RequestMethod.POST)
+    public String save(Model model, User user){
+//        User user = User.builder()
+//                .email(model.getAttribute("email").toString())
+//                .password(model.getAttribute("password").toString())
+//                .firstName(model.getAttribute("firstName").toString())
+//                .lastName(model.getAttribute("lastName").toString())
+//                .role(Role.valueOf(model.getAttribute("role").toString()))
+//                .build();
         User save = userRepository.save(user);
         return viewUsers(model);
     }

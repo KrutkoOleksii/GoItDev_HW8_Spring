@@ -43,15 +43,17 @@ public class ProducerController {
         return "saveProducer";
     }
 
-    @RequestMapping(value = {"saveProducer"}, method = RequestMethod.GET)
-    public String save(Model model){
-        Producer producer = Producer.builder()
-                .name(model.getAttribute("name").toString())
-                .build();
+    @RequestMapping(value = {"saveProducer"}, method = RequestMethod.POST)
+    public String save(Model model, Producer producer){
         Producer save = producerRepository.save(producer);
         return viewProducers(model);
     }
 
+    @RequestMapping(value = {"saveProducer"}, method = RequestMethod.PUT)
+    public String update(Model model, Producer producer){
+        Producer save = producerRepository.save(producer);
+        return viewProducers(model);
+    }
     @RequestMapping(value = {"delete"}, method = RequestMethod.GET)
     public String delete(Model model, Long id){
         producerRepository.deleteById(id);

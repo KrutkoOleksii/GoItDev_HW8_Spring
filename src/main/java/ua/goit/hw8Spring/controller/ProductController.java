@@ -43,12 +43,13 @@ public class ProductController {
     }
 
     @RequestMapping(value = {"saveProduct"}, method = RequestMethod.POST)
-    public String save(Model model){
-        Product product = Product.builder()
-                .name(model.getAttribute("name").toString())
-                .price(Long.getLong(model.getAttribute("price").toString()))
-                .producer(producerRepository.findByName(model.getAttribute("producer").toString()).get())
-                .build();
+    public String save(Model model, Product product){
+        Product save = productRepository.save(product);
+        return viewProducts(model);
+    }
+
+    @RequestMapping(value = {"saveProduct"}, method = RequestMethod.PUT)
+    public String update(Model model, Product product){
         Product save = productRepository.save(product);
         return viewProducts(model);
     }

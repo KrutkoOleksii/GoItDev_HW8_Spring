@@ -5,4 +5,5 @@ import ua.goit.hw8Spring.model.User;
 
 @Service
 public class UserServiceImpl implements BaseService<User,Long>{
+
 }

@@ -30,6 +30,26 @@ public class ProducerController {
         return "producers";
     }
 
+    @RequestMapping(value = {"find"}, method = RequestMethod.GET)
+    public String findById(Model model, Long id) {
+        Producer producer = producerRepository.findById(id).orElse(null);
+        model.addAttribute("producer", producer);
+        return "producer";
+    }
+
+    @RequestMapping(value = {"findByName"}, method = RequestMethod.GET)
+    public String findByName(Model model) {
+        model.addAttribute("entity", Producer.class.getSimpleName());
+        return "findByName";
+    }
+
+    @RequestMapping(value = {"findEntity"}, method = RequestMethod.GET)
+    public String findEntity(Model model, String name) {
+        Producer producer = producerRepository.findByName(name).orElse(null);
+        model.addAttribute("producer", producer);
+        return "producer";
+    }
+
     @RequestMapping(value = {"add"}, method = RequestMethod.GET)
     public String add(Model model){
         model.addAttribute("mode",0);
@@ -59,40 +79,5 @@ public class ProducerController {
         producerRepository.deleteById(id);
         return viewProducers(model);
     }
-
-//    //@RolesAllowed({"ADMIN","USER"})
-//    @GetMapping(value = "all")
-//    public List<Producer> findAll() {
-//        return producerRepository.findAll();
-//    }
-//    //@RolesAllowed({"ADMIN","USER"})
-//    @GetMapping({"/{id}","/"})
-//    public Optional<Producer> findById(@PathVariable(required = false, name = "id") Optional<Long> id) {
-//        return id.map(producerRepository::findById).orElse(null);
-//    }
-//    //@RolesAllowed({"ADMIN"})
-//    @PostMapping
-//    public Producer save(@RequestBody Producer producer){
-//        return producerRepository.save(producer);
-//    }
-//    //@RolesAllowed({"ADMIN"})
-//    @PutMapping("name")
-//    public Producer changeName(@ApiParam(required = true) @RequestParam(name = "id") Long id, @RequestParam(name = "name") String name){
-//        return producerRepository.findById(id)
-//                .map(producer -> {producer.setName(name);
-//                return producerRepository.save(producer);
-//                })
-//                .orElse(null);
-//    }
-//    //@RolesAllowed({"ADMIN"})
-//    @DeleteMapping("{id}")
-//    public void delete(@PathVariable(name = "id") Long id) {
-//        producerRepository.deleteById(id);
-//    }
-//    //@RolesAllowed({"ADMIN","USER"})
-//    @GetMapping("/name/{name}")
-//    public Optional<Producer> findByName(@PathVariable(name="name") String name) {
-//        return producerRepository.findByName(name);
-//    }
 
 }

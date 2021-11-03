@@ -4,14 +4,14 @@
     <head>
         <title>Find ${entity}</title>
         <style>
-            <%@include file="/style.css" %>
+            <%@include file="style.css" %>
         </style>
     </head>
     <body>
-    <c:import url="/navibar.jsp"/>
+    <c:import url="navibar.jsp"/>
         <h2>Find ${entity} by name:</h2>
         <p>
-        <form name=${entity}"FindForm" method="get" action="findByName">
+        <form name=${entity}"FindForm" method="get" action="findEntity">
         <table>
             <tr>
                 <th>Enter ${entity} name:</th>

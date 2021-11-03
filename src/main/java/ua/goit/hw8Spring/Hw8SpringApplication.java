@@ -10,6 +10,8 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import ua.goit.hw8Spring.service.UserDetailsServiceImpl;
 
 @EnableJpaRepositories
 @SpringBootApplication
@@ -22,6 +24,11 @@ public class Hw8SpringApplication extends SpringBootServletInitializer {
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(Hw8SpringApplication.class);
+	}
+
+	@Bean
+	public UserDetailsService getUserDetailsService(){
+		return new UserDetailsServiceImpl();
 	}
 
 //	@Bean

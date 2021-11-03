@@ -27,6 +27,27 @@ public class ProductController {
         model.addAttribute("products",productList);
         return "products";
     }
+
+    @RequestMapping(value = {"findByName"}, method = RequestMethod.GET)
+    public String findByName(Model model) {
+        model.addAttribute("entity", Product.class.getSimpleName());
+        return "findByName";
+    }
+
+    @RequestMapping(value = {"findEntity"}, method = RequestMethod.GET)
+    public String findEntity(Model model, String name) {
+        Product product = productRepository.findByName(name).orElse(null);
+        model.addAttribute("product", product);
+        return "product";
+    }
+
+    @RequestMapping(value = {"find"}, method = RequestMethod.GET)
+    public String findById(Model model, Long id) {
+        Product product = productRepository.findById(id).orElse(null);
+        model.addAttribute("product", product);
+        return "product";
+    }
+
     @RequestMapping(value = {"add"}, method = RequestMethod.GET)
     public String add(Model model){
         model.addAttribute("mode",0);
@@ -59,34 +80,5 @@ public class ProductController {
         productRepository.deleteById(id);
         return viewProducts(model);
     }
-
-//    @GetMapping(value = "all")
-//    public List<Product> findAll() {
-//        return productRepository.findAll();
-//    }
-//
-//    @GetMapping({"/{id}","/"})
-//    public Optional<Product> findById(@PathVariable(required = false, name = "id") Optional<Long> id) {
-//        return id.map(productRepository::findById).orElse(null);
-//    }
-//
-//    @PutMapping("name")
-//    public Product changeName(@ApiParam(required = true) @RequestParam(name = "id") Long id, @RequestParam(name = "name") String name){
-//        return productRepository.findById(id)
-//                .map(producer -> {producer.setName(name);
-//                    return productRepository.save(producer);
-//                })
-//                .orElse(null);
-//    }
-//
-//    @DeleteMapping("{id}")
-//    public void delete(@PathVariable(name = "id") Long id) {
-//        productRepository.deleteById(id);
-//    }
-
-//    @GetMapping("/name/{name}")
-//    public Optional<Product> findByName(@PathVariable(name="name") String name) {
-//        return productRepository.findByName(name);
-//    }
 
 }

@@ -30,7 +30,7 @@
                 ID: <input readonly type="text" name="id" value="${product.id}" /> <br/>
                 New name: <input type="text" name="name" value="${product.name}" /> <br/>
                 New price: <input type="numeric" name="price" value="${product.price}" /> <br/>
-                Producer: <input type="numeric" name="producer" value=${product.producer.id} /> <br/>
+                Producer: <input type="numeric" name="producer" value="${product.producer.id}" /> <br/>
 
                 <input type="submit" value="Update product" class="button"/>
             </form>

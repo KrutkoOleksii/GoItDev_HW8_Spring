@@ -44,15 +44,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 
-//        User user = userRepository.findByEmail("a@a.ua").orElse(null);
 //        auth.inMemoryAuthentication()
-//                .withUser("user1").password(passwordEncoder().encode("Pass1")).roles(Role.USER.getRole())
+//                .withUser("user1").password(passwordEncoder().encode("pass1")).roles(Role.USER.getRole())
 //                .and()
-//                .withUser("user2").password(passwordEncoder().encode("Pass2")).roles(Role.USER.getRole())
-//                .and()
-//                .withUser(user.getEmail()).password(passwordEncoder().encode(user.getPassword())).roles(user.getRole().getRole())
-//                .and()
-//                .withUser("admin").password(passwordEncoder().encode("PassAdmin")).roles(Role.ADMIN.getRole());
+//                .withUser("admin").password(passwordEncoder().encode("admin")).roles(Role.ADMIN.getRole());
     }
 
     @Override

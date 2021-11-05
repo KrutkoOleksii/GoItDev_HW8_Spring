@@ -2,7 +2,10 @@ package ua.goit.hw8Spring.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -15,14 +18,20 @@ import ua.goit.hw8Spring.service.UserDetailsServiceImpl;
 import ua.goit.hw8Spring.service.UserServiceImpl;
 
 import java.util.Iterator;
+import java.util.Optional;
 
+@Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
-    //private UserRepository userRepository;
+    @Autowired
+    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
     @Autowired
     public void registerGlobalAuthentication(AuthenticationManagerBuilder auth) throws Exception {
@@ -33,12 +42,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user1").password(passwordEncoder().encode("Pass1")).roles(Role.USER.getRole())
-                .and()
-                .withUser("user2").password(passwordEncoder().encode("Pass2")).roles(Role.USER.getRole())
-                .and()
-                .withUser("admin").password(passwordEncoder().encode("PassAdmin")).roles(Role.ADMIN.getRole());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+
+//        User user = userRepository.findByEmail("a@a.ua").orElse(null);
+//        auth.inMemoryAuthentication()
+//                .withUser("user1").password(passwordEncoder().encode("Pass1")).roles(Role.USER.getRole())
+//                .and()
+//                .withUser("user2").password(passwordEncoder().encode("Pass2")).roles(Role.USER.getRole())
+//                .and()
+//                .withUser(user.getEmail()).password(passwordEncoder().encode(user.getPassword())).roles(user.getRole().getRole())
+//                .and()
+//                .withUser("admin").password(passwordEncoder().encode("PassAdmin")).roles(Role.ADMIN.getRole());
     }
 
     @Override
@@ -52,19 +66,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .formLogin()
                 .loginPage("/login.jsp")
-                .defaultSuccessUrl("/index.jsp", true)
+                .defaultSuccessUrl("/", true)
                 .failureUrl("/login.html?error=true")
-//                .failureHandler(authenticationFailureHandler())
                 .permitAll()
                     .and()
                 .logout()
+                .logoutSuccessUrl("/login?logout")
                 .permitAll();
 
     }
 
     @Bean
+    public AuthenticationManager customAuthenticationManager() throws Exception {
+        return authenticationManager();
+    }
+
+    @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(12);
     }
 
 }

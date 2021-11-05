@@ -10,6 +10,7 @@ import ua.goit.hw8Spring.model.Product;
 import ua.goit.hw8Spring.model.Role;
 import ua.goit.hw8Spring.model.User;
 import ua.goit.hw8Spring.repository.UserRepository;
+import ua.goit.hw8Spring.service.UserServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.Optional;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final UserServiceImpl userService;
 
     @RequestMapping(value = {"users"}, method = RequestMethod.GET)
     public String viewUsers(Model model) {
@@ -66,7 +68,8 @@ public class UserController {
 
     @RequestMapping(value = {"saveUser"}, method = RequestMethod.POST)
     public String save(Model model, User user){
-        User save = userRepository.save(user);
+        userService.userRegistration(user);
+        //User save = userRepository.save(user);
         return viewUsers(model);
     }
 

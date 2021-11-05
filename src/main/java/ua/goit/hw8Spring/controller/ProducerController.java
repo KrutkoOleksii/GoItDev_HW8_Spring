@@ -6,15 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.goit.hw8Spring.model.Producer;
-import ua.goit.hw8Spring.model.Product;
 import ua.goit.hw8Spring.repository.ProducerRepository;
 
 import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 
 @RequiredArgsConstructor
 @Controller
@@ -50,6 +46,7 @@ public class ProducerController {
         return "producer";
     }
 
+    @RolesAllowed({"ADMIN"})
     @RequestMapping(value = {"add"}, method = RequestMethod.GET)
     public String add(Model model){
         model.addAttribute("mode",0);

@@ -40,7 +40,7 @@
                     </c:forEach>
                 </select>
                 <br/> --%>
-                New last name: <input type="text" name="role" value="${user.role.getRole()}" /> <br/>
+                New role: <input type="text" name="role" value="${user.role.getRole()}" /> <br/>
 
                 <input type="submit" value="Update user" class="button"/>
             </form>

@@ -10,6 +10,7 @@ import ua.goit.hw8Spring.model.Product;
 import ua.goit.hw8Spring.repository.ProducerRepository;
 import ua.goit.hw8Spring.repository.ProductRepository;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -47,7 +48,8 @@ public class ProductController {
         return "product";
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
+    @RolesAllowed({"ADMIN"})
     @RequestMapping(value = {"add"}, method = RequestMethod.GET)
     public String add(Model model){
         model.addAttribute("mode",0);
@@ -56,7 +58,8 @@ public class ProductController {
         return "saveProduct";
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
+    @RolesAllowed({"ADMIN"})
     @RequestMapping(value = {"update"}, method = RequestMethod.GET)
     public String update(Model model, Long id){
         model.addAttribute("mode",1);

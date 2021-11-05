@@ -1,6 +1,7 @@
 package ua.goit.hw8Spring.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Controller;
@@ -49,6 +50,7 @@ public class ProducerController {
 
     //@PreAuthorize("hasRole('ADMIN')")
     @RolesAllowed({"ADMIN"})
+    //@Secured({"ADMIN"})
     @RequestMapping(value = {"add"}, method = RequestMethod.GET)
     public String add(Model model){
         model.addAttribute("mode",0);
@@ -57,6 +59,7 @@ public class ProducerController {
 
     //@PreAuthorize("hasRole('ADMIN')")
     @RolesAllowed({"ADMIN"})
+    //@Secured({"ADMIN"})
     @RequestMapping(value = {"update"}, method = RequestMethod.GET)
     public String update(Model model, Long id){
         model.addAttribute("mode",1);

@@ -31,8 +31,6 @@ public class User implements BaseEntity <Long>{
     @Column(name = "last_name")
     private String lastName;
 
-    //@ManyToOne
-    //@JoinColumn(name = "role_id")
     @Column(name = "role")
     private Role role;
 

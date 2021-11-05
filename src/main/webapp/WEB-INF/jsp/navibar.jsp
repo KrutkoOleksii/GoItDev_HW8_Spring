@@ -30,4 +30,5 @@
             <a href="${pageContext.request.contextPath}/user/add">Create User</a>
         </div>
     </div>
+    <a href="${pageContext.request.contextPath}/logout">Logout</a>
 </div>

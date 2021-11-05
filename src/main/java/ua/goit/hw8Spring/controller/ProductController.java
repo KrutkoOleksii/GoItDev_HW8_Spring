@@ -1,7 +1,7 @@
 package ua.goit.hw8Spring.controller;
 
-import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,6 @@ import ua.goit.hw8Spring.repository.ProducerRepository;
 import ua.goit.hw8Spring.repository.ProductRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Controller
@@ -48,6 +47,7 @@ public class ProductController {
         return "product";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = {"add"}, method = RequestMethod.GET)
     public String add(Model model){
         model.addAttribute("mode",0);
@@ -56,6 +56,7 @@ public class ProductController {
         return "saveProduct";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = {"update"}, method = RequestMethod.GET)
     public String update(Model model, Long id){
         model.addAttribute("mode",1);

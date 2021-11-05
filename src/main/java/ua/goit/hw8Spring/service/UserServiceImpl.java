@@ -17,7 +17,7 @@ public class UserServiceImpl implements BaseService<User,Long>{
 
     public void userRegistration(User user){
         user.setPassword(encoder.encode(user.getPassword()));
-        user.setRole(Role.USER);
+        //user.setRole(Role.USER);
         userRepository.save(user);
     }
 

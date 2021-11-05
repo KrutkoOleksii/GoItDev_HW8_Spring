@@ -1,7 +1,8 @@
 package ua.goit.hw8Spring.controller;
 
-import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,8 +11,8 @@ import ua.goit.hw8Spring.repository.ProducerRepository;
 
 import javax.annotation.security.RolesAllowed;
 import java.util.List;
-import java.util.Optional;
 
+//@EnableWebSecurity
 @RequiredArgsConstructor
 @Controller
 @RequestMapping(value = "producer")
@@ -46,6 +47,7 @@ public class ProducerController {
         return "producer";
     }
 
+    //@PreAuthorize("hasRole('ADMIN')")
     @RolesAllowed({"ADMIN"})
     @RequestMapping(value = {"add"}, method = RequestMethod.GET)
     public String add(Model model){
@@ -53,6 +55,8 @@ public class ProducerController {
         return "saveProducer";
     }
 
+    //@PreAuthorize("hasRole('ADMIN')")
+    @RolesAllowed({"ADMIN"})
     @RequestMapping(value = {"update"}, method = RequestMethod.GET)
     public String update(Model model, Long id){
         model.addAttribute("mode",1);
@@ -60,17 +64,20 @@ public class ProducerController {
         return "saveProducer";
     }
 
+    @RolesAllowed("ADMIN")
     @RequestMapping(value = {"saveProducer"}, method = RequestMethod.POST)
     public String save(Model model, Producer producer){
         Producer save = producerRepository.save(producer);
         return viewProducers(model);
     }
 
+    @RolesAllowed("ADMIN")
     @RequestMapping(value = {"saveProducer"}, method = RequestMethod.PUT)
     public String update(Model model, Producer producer){
         Producer save = producerRepository.save(producer);
         return viewProducers(model);
     }
+
     @RequestMapping(value = {"delete"}, method = RequestMethod.GET)
     public String delete(Model model, Long id){
         producerRepository.deleteById(id);

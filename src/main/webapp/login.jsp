@@ -15,7 +15,7 @@
 		<form:form action="" method="post">
 			<label>Username:</label> <input type="text" name="username" />
 			<label>Password:</label> <input type="password" name="password" />
-			<input type="submit"/>
+			<input type="submit" name = "LOGIN"/>
 		</form:form>
 	</body>
 </html>

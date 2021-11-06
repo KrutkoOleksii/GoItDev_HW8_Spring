@@ -22,7 +22,7 @@
         </tr>
         <tr>
             <th>Password</th>
-            <td><c:out value="${user.password}"/></td>
+            <td><c:out value="*****"/></td>
         </tr>
         <tr>
             <th>First name</th>

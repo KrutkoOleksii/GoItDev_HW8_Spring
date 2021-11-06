@@ -14,7 +14,7 @@
 
 <c:import url="navibar.jsp"/>
     <div>
-    <img src="https://i.dlpng.com/static/png/6815274_preview.png"
+    <img src="https://st.depositphotos.com/1575949/4950/v/950/depositphotos_49506497-stock-illustration-error-red-stamp-text.jpg"
               alt="ERROR"/>
     </div>
 </body>

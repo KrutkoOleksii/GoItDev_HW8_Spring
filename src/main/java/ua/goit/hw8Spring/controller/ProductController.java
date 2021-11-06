@@ -48,8 +48,8 @@ public class ProductController {
         return "product";
     }
 
-//    @PreAuthorize("hasRole('ADMIN')")
-    @RolesAllowed({"ADMIN"})
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    //@RolesAllowed({"ADMIN"})
     @RequestMapping(value = {"add"}, method = RequestMethod.GET)
     public String add(Model model){
         model.addAttribute("mode",0);
@@ -58,8 +58,8 @@ public class ProductController {
         return "saveProduct";
     }
 
-//    @PreAuthorize("hasRole('ADMIN')")
-    @RolesAllowed({"ADMIN"})
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    //@RolesAllowed({"ADMIN"})
     @RequestMapping(value = {"update"}, method = RequestMethod.GET)
     public String update(Model model, Long id){
         model.addAttribute("mode",1);

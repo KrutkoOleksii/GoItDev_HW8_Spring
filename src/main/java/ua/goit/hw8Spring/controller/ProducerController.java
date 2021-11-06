@@ -48,18 +48,14 @@ public class ProducerController {
         return "producer";
     }
 
-    //@PreAuthorize("hasRole('ADMIN')")
-    @RolesAllowed({"ADMIN"})
-    //@Secured({"ADMIN"})
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"add"}, method = RequestMethod.GET)
     public String add(Model model){
         model.addAttribute("mode",0);
         return "saveProducer";
     }
 
-    //@PreAuthorize("hasRole('ADMIN')")
-    @RolesAllowed({"ADMIN"})
-    //@Secured({"ADMIN"})
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"update"}, method = RequestMethod.GET)
     public String update(Model model, Long id){
         model.addAttribute("mode",1);

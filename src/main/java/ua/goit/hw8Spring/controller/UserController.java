@@ -10,10 +10,9 @@ import ua.goit.hw8Spring.model.User;
 import ua.goit.hw8Spring.repository.UserRepository;
 import ua.goit.hw8Spring.service.UserServiceImpl;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
-
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequiredArgsConstructor
 @Controller
 @RequestMapping(value = "user")
@@ -49,8 +48,7 @@ public class UserController {
         return "user";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    //@RolesAllowed({"ADMIN"})
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"add"}, method = RequestMethod.GET)
     public String add(Model model){
         model.addAttribute("mode",0);
@@ -58,8 +56,7 @@ public class UserController {
         return "saveUser";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    //@RolesAllowed({"ADMIN"})
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"update"}, method = RequestMethod.GET)
     public String update(Model model, Long id){
         model.addAttribute("mode",1);

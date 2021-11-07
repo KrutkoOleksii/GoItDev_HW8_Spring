@@ -37,4 +37,5 @@ public class Hw8SpringApplication extends SpringBootServletInitializer {
 //											   @Value("${aws.access.secret.key}") String awsAccessSecretKey) {
 //		return new BasicAWSCredentials(awsAccessKeyId,awsAccessSecretKey);
 //	}
+
 }

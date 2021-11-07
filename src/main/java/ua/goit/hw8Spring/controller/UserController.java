@@ -12,7 +12,6 @@ import ua.goit.hw8Spring.service.UserServiceImpl;
 
 import java.util.List;
 
-@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequiredArgsConstructor
 @Controller
 @RequestMapping(value = "user")
@@ -21,6 +20,12 @@ public class UserController {
     private final UserRepository userRepository;
     private final UserServiceImpl userService;
 
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String showRegisterUser() {
+        return "registerUser";
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"users"}, method = RequestMethod.GET)
     public String viewUsers(Model model) {
         List<User> userList = userRepository.findAll();
@@ -28,12 +33,14 @@ public class UserController {
         return "users";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"findByName"}, method = RequestMethod.GET)
     public String findByName(Model model) {
         model.addAttribute("entity", User.class.getSimpleName());
         return "findByName";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"findEntity"}, method = RequestMethod.GET)
     public String findEntity(Model model, String name) {
         User user = userRepository.findByEmail(name).orElse(null);
@@ -41,6 +48,7 @@ public class UserController {
         return "user";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"find"}, method = RequestMethod.GET)
     public String findById(Model model, Long id) {
         User user = userRepository.findById(id).orElse(null);
@@ -48,7 +56,7 @@ public class UserController {
         return "user";
     }
 
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"add"}, method = RequestMethod.GET)
     public String add(Model model){
         model.addAttribute("mode",0);
@@ -56,7 +64,7 @@ public class UserController {
         return "saveUser";
     }
 
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"update"}, method = RequestMethod.GET)
     public String update(Model model, Long id){
         model.addAttribute("mode",1);
@@ -64,13 +72,20 @@ public class UserController {
         return "saveUser";
     }
 
+    @RequestMapping(value = {"register"}, method = RequestMethod.POST)
+    public String register(Model model, User user) {
+        user.setRole(Role.ROLE_USER);
+        userService.userRegistration(user);
+        return "/index";
+    }
+
     @RequestMapping(value = {"saveUser"}, method = RequestMethod.POST)
     public String save(Model model, User user){
         userService.userRegistration(user);
-        //User save = userRepository.save(user);
         return viewUsers(model);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"delete"}, method = RequestMethod.GET)
     public String delete(Model model, Long id){
         userRepository.deleteById(id);

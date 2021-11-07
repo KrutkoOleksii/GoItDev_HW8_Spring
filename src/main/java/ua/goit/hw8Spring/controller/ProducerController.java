@@ -1,19 +1,15 @@
 package ua.goit.hw8Spring.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.goit.hw8Spring.model.Producer;
 import ua.goit.hw8Spring.repository.ProducerRepository;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
-//@EnableWebSecurity
 @RequiredArgsConstructor
 @Controller
 @RequestMapping(value = "producer")
@@ -63,14 +59,12 @@ public class ProducerController {
         return "saveProducer";
     }
 
-    @RolesAllowed("ADMIN")
     @RequestMapping(value = {"saveProducer"}, method = RequestMethod.POST)
     public String save(Model model, Producer producer){
         Producer save = producerRepository.save(producer);
         return viewProducers(model);
     }
 
-    @RolesAllowed("ADMIN")
     @RequestMapping(value = {"saveProducer"}, method = RequestMethod.PUT)
     public String update(Model model, Producer producer){
         Producer save = producerRepository.save(producer);

@@ -7,8 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.goit.hw8Spring.model.Producer;
 import ua.goit.hw8Spring.model.Product;
-import ua.goit.hw8Spring.repository.ProducerRepository;
-import ua.goit.hw8Spring.repository.ProductRepository;
+import ua.goit.hw8Spring.service.ProducerServiceImpl;
+import ua.goit.hw8Spring.service.ProductServiceImpl;
 
 import java.util.List;
 
@@ -17,12 +17,12 @@ import java.util.List;
 @RequestMapping(value = "product")
 public class ProductController {
 
-    private final ProductRepository productRepository;
-    private final ProducerRepository producerRepository;
+    private final ProductServiceImpl productService;
+    private final ProducerServiceImpl producerService;
 
     @RequestMapping(value = {"products"}, method = RequestMethod.GET)
-    public String viewProducts(Model model) {
-        List<Product> productList = productRepository.findAll();
+    public String findAll(Model model) {
+        List<Product> productList = productService.findAll();
         model.addAttribute("products",productList);
         return "products";
     }
@@ -34,15 +34,15 @@ public class ProductController {
     }
 
     @RequestMapping(value = {"findEntity"}, method = RequestMethod.GET)
-    public String findEntity(Model model, String name) {
-        Product product = productRepository.findByName(name).orElse(null);
+    public String findByName(Model model, String name) {
+        Product product = productService.findByName(name);
         model.addAttribute("product", product);
         return "product";
     }
 
     @RequestMapping(value = {"find"}, method = RequestMethod.GET)
     public String findById(Model model, Long id) {
-        Product product = productRepository.findById(id).orElse(null);
+        Product product = productService.findById(id);
         model.addAttribute("product", product);
         return "product";
     }
@@ -51,7 +51,7 @@ public class ProductController {
     @RequestMapping(value = {"add"}, method = RequestMethod.GET)
     public String add(Model model){
         model.addAttribute("mode",0);
-        List<Producer> producers = producerRepository.findAll();
+        List<Producer> producers = producerService.findAll();
         model.addAttribute("producers",producers);
         return "saveProduct";
     }
@@ -60,26 +60,26 @@ public class ProductController {
     @RequestMapping(value = {"update"}, method = RequestMethod.GET)
     public String update(Model model, Long id){
         model.addAttribute("mode",1);
-        model.addAttribute("product", productRepository.findById(id).get());
+        model.addAttribute("product", productService.findById(id));
         return "saveProduct";
     }
 
     @RequestMapping(value = {"saveProduct"}, method = RequestMethod.POST)
     public String save(Model model, Product product){
-        Product save = productRepository.save(product);
-        return viewProducts(model);
+        Product save = productService.save(product);
+        return findAll(model);
     }
 
     @RequestMapping(value = {"saveProduct"}, method = RequestMethod.PUT)
     public String update(Model model, Product product){
-        Product save = productRepository.save(product);
-        return viewProducts(model);
+        Product save = productService.save(product);
+        return findAll(model);
     }
 
     @RequestMapping(value = {"delete"}, method = RequestMethod.GET)
-    public String delete(Model model, Long id){
-        productRepository.deleteById(id);
-        return viewProducts(model);
+    public String deleteById(Model model, Long id){
+        productService.deleteById(id);
+        return findAll(model);
     }
 
 }

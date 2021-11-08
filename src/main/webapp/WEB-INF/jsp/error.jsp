@@ -14,8 +14,8 @@
 
 <c:import url="navibar.jsp"/>
     <div>
-    <img src="https://st.depositphotos.com/1575949/4950/v/950/depositphotos_49506497-stock-illustration-error-red-stamp-text.jpg"
-              alt="ERROR"/>
+    <img src="https://media.istockphoto.com/vectors/access-denied-stamp-vector-id478063817?k=20&m=478063817&s=612x612&w=0&h=60mA5Mz70McNzqH21Ybb-bG3UJCxo-_B-GRuddvQJFc="
+              alt="ACCESS DENIED"/>
     </div>
 </body>
 </html>

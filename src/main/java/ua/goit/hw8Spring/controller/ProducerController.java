@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.goit.hw8Spring.model.Producer;
 import ua.goit.hw8Spring.repository.ProducerRepository;
+import ua.goit.hw8Spring.service.ProducerServiceImpl;
 
 import java.util.List;
 
@@ -15,18 +16,19 @@ import java.util.List;
 @RequestMapping(value = "producer")
 public class ProducerController {
 
-    private final ProducerRepository producerRepository;
+//    private final ProducerRepository producerRepository;
+    private final ProducerServiceImpl producerService;
 
     @RequestMapping(value = {"producers"}, method = RequestMethod.GET)
     public String viewProducers(Model model) {
-        List<Producer> producerList = producerRepository.findAll();
+        List<Producer> producerList = producerService.findAll();
         model.addAttribute("producers",producerList);
         return "producers";
     }
 
     @RequestMapping(value = {"find"}, method = RequestMethod.GET)
     public String findById(Model model, Long id) {
-        Producer producer = producerRepository.findById(id).orElse(null);
+        Producer producer = producerService.findById(id);
         model.addAttribute("producer", producer);
         return "producer";
     }
@@ -39,7 +41,7 @@ public class ProducerController {
 
     @RequestMapping(value = {"findEntity"}, method = RequestMethod.GET)
     public String findEntity(Model model, String name) {
-        Producer producer = producerRepository.findByName(name).orElse(null);
+        Producer producer = producerService.findByName(name);
         model.addAttribute("producer", producer);
         return "producer";
     }
@@ -55,25 +57,25 @@ public class ProducerController {
     @RequestMapping(value = {"update"}, method = RequestMethod.GET)
     public String update(Model model, Long id){
         model.addAttribute("mode",1);
-        model.addAttribute("producer", producerRepository.findById(id).get());
+        model.addAttribute("producer", producerService.findById(id));
         return "saveProducer";
     }
 
     @RequestMapping(value = {"saveProducer"}, method = RequestMethod.POST)
     public String save(Model model, Producer producer){
-        Producer save = producerRepository.save(producer);
+        Producer save = producerService.save(producer);
         return viewProducers(model);
     }
 
     @RequestMapping(value = {"saveProducer"}, method = RequestMethod.PUT)
     public String update(Model model, Producer producer){
-        Producer save = producerRepository.save(producer);
+        Producer save = producerService.save(producer);
         return viewProducers(model);
     }
 
     @RequestMapping(value = {"delete"}, method = RequestMethod.GET)
     public String delete(Model model, Long id){
-        producerRepository.deleteById(id);
+        producerService.deleteById(id);
         return viewProducers(model);
     }
 

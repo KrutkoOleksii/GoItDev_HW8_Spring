@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.goit.hw8Spring.model.Role;
 import ua.goit.hw8Spring.model.User;
-import ua.goit.hw8Spring.repository.UserRepository;
 import ua.goit.hw8Spring.service.UserServiceImpl;
 
 import java.util.List;
@@ -17,7 +16,6 @@ import java.util.List;
 @RequestMapping(value = "user")
 public class UserController {
 
-    private final UserRepository userRepository;
     private final UserServiceImpl userService;
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -28,7 +26,7 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"users"}, method = RequestMethod.GET)
     public String viewUsers(Model model) {
-        List<User> userList = userRepository.findAll();
+        List<User> userList = userService.findAll();
         model.addAttribute("users",userList);
         return "users";
     }
@@ -43,7 +41,7 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"findEntity"}, method = RequestMethod.GET)
     public String findEntity(Model model, String name) {
-        User user = userRepository.findByEmail(name).orElse(null);
+        User user = userService.findByEmail(name);
         model.addAttribute("user", user);
         return "user";
     }
@@ -51,7 +49,7 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"find"}, method = RequestMethod.GET)
     public String findById(Model model, Long id) {
-        User user = userRepository.findById(id).orElse(null);
+        User user = userService.findById(id);
         model.addAttribute("user", user);
         return "user";
     }
@@ -68,7 +66,7 @@ public class UserController {
     @RequestMapping(value = {"update"}, method = RequestMethod.GET)
     public String update(Model model, Long id){
         model.addAttribute("mode",1);
-        model.addAttribute("user", userRepository.findById(id).get());
+        model.addAttribute("user", userService.findById(id));
         return "saveUser";
     }
 
@@ -87,8 +85,8 @@ public class UserController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"delete"}, method = RequestMethod.GET)
-    public String delete(Model model, Long id){
-        userRepository.deleteById(id);
+    public String deleteById(Model model, Long id){
+        if (userService.count()>1L) userService.deleteById(id);
         return viewUsers(model);
     }
 

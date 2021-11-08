@@ -72,9 +72,8 @@ public class UserController {
 
     @RequestMapping(value = {"register"}, method = RequestMethod.POST)
     public String register(Model model, User user) {
-        user.setRole(Role.ROLE_USER);
         userService.userRegistration(user);
-        return "/index";
+        return "/login";
     }
 
     @RequestMapping(value = {"saveUser"}, method = RequestMethod.POST)

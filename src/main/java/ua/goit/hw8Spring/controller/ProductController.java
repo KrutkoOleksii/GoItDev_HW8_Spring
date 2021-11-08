@@ -28,7 +28,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = {"findByName"}, method = RequestMethod.GET)
-    public String findByName(Model model) {
+    public String openFindForm(Model model) {
         model.addAttribute("entity", Product.class.getSimpleName());
         return "findByName";
     }

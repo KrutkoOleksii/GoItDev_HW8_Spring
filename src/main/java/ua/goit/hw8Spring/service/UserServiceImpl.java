@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import ua.goit.hw8Spring.model.Role;
 import ua.goit.hw8Spring.model.User;
 import ua.goit.hw8Spring.repository.UserRepository;
 
@@ -18,8 +19,11 @@ public class UserServiceImpl implements BaseService<User,Long>{
     private UserRepository userRepository;
 
     public void userRegistration(User user){
-        user.setPassword(encoder.encode(user.getPassword()));
-        userRepository.save(user);
+        if (!userRepository.findByEmail(user.getEmail()).isPresent()) {
+            user.setRole(Role.ROLE_USER);
+            user.setPassword(encoder.encode(user.getPassword()));
+            userRepository.save(user);
+        }
     }
 
     public List<User> findAll(){

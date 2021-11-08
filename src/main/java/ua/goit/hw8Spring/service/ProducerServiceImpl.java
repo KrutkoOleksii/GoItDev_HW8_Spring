@@ -1,6 +1,7 @@
 package ua.goit.hw8Spring.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import java.util.List;
 @Service
 public class ProducerServiceImpl implements BaseService<Producer,Long>{
 
+    @Autowired
     private ProducerRepository producerRepository;
 
     public List<Producer> findAll() {

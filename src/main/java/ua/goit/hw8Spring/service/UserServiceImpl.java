@@ -3,7 +3,6 @@ package ua.goit.hw8Spring.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import ua.goit.hw8Spring.model.Role;
 import ua.goit.hw8Spring.model.User;
 import ua.goit.hw8Spring.repository.UserRepository;

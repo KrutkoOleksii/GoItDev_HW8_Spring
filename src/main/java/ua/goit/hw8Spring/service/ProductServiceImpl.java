@@ -3,7 +3,6 @@ package ua.goit.hw8Spring.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import ua.goit.hw8Spring.model.Product;
 import ua.goit.hw8Spring.repository.ProducerRepository;
 import ua.goit.hw8Spring.repository.ProductRepository;

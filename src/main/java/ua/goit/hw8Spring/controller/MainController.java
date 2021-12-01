@@ -15,7 +15,6 @@ public class MainController {
         return "index";
     }
 
-    //@GetMapping("/login")
     @RequestMapping(value = { "/login" }, method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
         if (Objects.nonNull(error)) {

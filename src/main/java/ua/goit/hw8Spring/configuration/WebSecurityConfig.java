@@ -11,14 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ua.goit.hw8Spring.model.Role;
-import ua.goit.hw8Spring.model.User;
-import ua.goit.hw8Spring.repository.UserRepository;
 import ua.goit.hw8Spring.service.UserDetailsServiceImpl;
-import ua.goit.hw8Spring.service.UserServiceImpl;
-
-import java.util.Iterator;
-import java.util.Optional;
 
 @Configuration
 @EnableWebSecurity
@@ -44,10 +37,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 
-//        auth.inMemoryAuthentication()
-//                .withUser("user1").password(passwordEncoder().encode("pass1")).roles(Role.USER.getRole())
-//                .and()
-//                .withUser("admin").password(passwordEncoder().encode("admin")).roles(Role.ADMIN.getRole());
     }
 
     @Override

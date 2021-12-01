@@ -26,8 +26,7 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"users"}, method = RequestMethod.GET)
     public String viewUsers(Model model) {
-        List<User> userList = userService.findAll();
-        model.addAttribute("users",userList);
+        model.addAttribute("users", userService.findAll());
         return "users";
     }
 
@@ -41,16 +40,14 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"findEntity"}, method = RequestMethod.GET)
     public String findEntity(Model model, String name) {
-        User user = userService.findByEmail(name);
-        model.addAttribute("user", user);
+        model.addAttribute("user", userService.findByEmail(name));
         return "user";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"find"}, method = RequestMethod.GET)
     public String findById(Model model, Long id) {
-        User user = userService.findById(id);
-        model.addAttribute("user", user);
+        model.addAttribute("user", userService.findById(id));
         return "user";
     }
 
@@ -58,7 +55,7 @@ public class UserController {
     @RequestMapping(value = {"add"}, method = RequestMethod.GET)
     public String add(Model model){
         model.addAttribute("mode",0);
-        model.addAttribute("roles",Role.values());
+        model.addAttribute("roles", Role.values());
         return "saveUser";
     }
 
@@ -85,7 +82,7 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"delete"}, method = RequestMethod.GET)
     public String deleteById(Model model, Long id){
-        if (userService.count()>1L) userService.deleteById(id);
+        if (userService.count() > 1L) userService.deleteById(id);
         return viewUsers(model);
     }
 

@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import ua.goit.hw8Spring.model.Producer;
 import ua.goit.hw8Spring.service.ProducerServiceImpl;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @Controller
 @RequestMapping(value = "producer")
@@ -19,15 +17,13 @@ public class ProducerController {
 
     @RequestMapping(value = {"producers"}, method = RequestMethod.GET)
     public String findAll(Model model) {
-        List<Producer> producerList = producerService.findAll();
-        model.addAttribute("producers",producerList);
+        model.addAttribute("producers",producerService.findAll());
         return "producers";
     }
 
     @RequestMapping(value = {"find"}, method = RequestMethod.GET)
     public String findById(Model model, Long id) {
-        Producer producer = producerService.findById(id);
-        model.addAttribute("producer", producer);
+        model.addAttribute("producer", producerService.findById(id));
         return "producer";
     }
 
@@ -39,8 +35,7 @@ public class ProducerController {
 
     @RequestMapping(value = {"findEntity"}, method = RequestMethod.GET)
     public String findByName(Model model, String name) {
-        Producer producer = producerService.findByName(name);
-        model.addAttribute("producer", producer);
+        model.addAttribute("producer", producerService.findByName(name));
         return "producer";
     }
 
@@ -61,13 +56,13 @@ public class ProducerController {
 
     @RequestMapping(value = {"saveProducer"}, method = RequestMethod.POST)
     public String save(Model model, Producer producer){
-        Producer save = producerService.save(producer);
+        producerService.save(producer);
         return findAll(model);
     }
 
     @RequestMapping(value = {"saveProducer"}, method = RequestMethod.PUT)
     public String update(Model model, Producer producer){
-        Producer save = producerService.save(producer);
+        producerService.save(producer);
         return findAll(model);
     }
 

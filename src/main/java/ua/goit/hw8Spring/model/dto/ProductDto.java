@@ -23,6 +23,6 @@ public class ProductDto implements BaseEntity<Long> {
 
     @Override
     public Long getId() {
-        return null;
+        return id;
     }
 }

@@ -9,8 +9,6 @@ import ua.goit.hw8Spring.model.Role;
 import ua.goit.hw8Spring.model.User;
 import ua.goit.hw8Spring.service.UserServiceImpl;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @Controller
 @RequestMapping(value = "user")
